@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Anotações para Provas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("fundo-feb.jpg") no-repeat center top fixed;
+      background-size: contain;
+      background-color: black;
+      color: #fff;
+      text-shadow: 1px 1px 3px #000;
+      margin: 0;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      padding-left: 80px;
+    }
+
+    .pagina-inicial {
+      display: block;
+    }
+
+    .pagina-materia {
+      display: none;
+    }
+
+    h1, h2 {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .btn-bar {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .btn-bar label {
+      padding: 8px 16px;
+      border: 1px solid #ffd700;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.5);
+      color: #ffd700;
+      text-shadow: 1px 1px 2px #000;
+      transition: background-color .3s, transform .2s;
+    }
+
+    .btn-bar label:hover {
+      background-color: rgba(255,215,0,.15);
+      transform: scale(1.03);
+    }
+
+    .btn-bar input[type="file"],
+    .btn-bar button {
+      display: none;
+    }
+
+    details {
+      margin-bottom: 15px;
+      background: rgba(0,0,0,.6);
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    summary {
+      font-weight: bold;
+      font-size: 1.1em;
+      cursor: pointer;
+      color: #ffd700;
+    }
+
+    .instrutor {
+      margin-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    .instrutor label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #fff;
+    }
+
+    .nome-instrutor {
+      color: #ffd700;
+      font-weight: 700;
+      font-style: italic;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+        .w3-sidebar {
+            width: 200px;
+            background: #222;
+    background-color: #000;
+        }
+  
+    textarea {
+      width: 100%;
+      min-height: 80px;
+      resize: none;
+      padding: 8px;
+      border-radius: 4px;
+      box-sizing: border-box;
+      background: #fff;
+      color: #000;
+    }
+
+
+  </style>
+</head>
+<body>
+  <nav class="w3-sidebar w3-bar-block w3-center w3-hide-small">
+    <a href="#" onclick="mostrarInicio()" class="w3-bar-item w3-button w3-padding-large w3-hover-black w3-hover-text-amber w3-text-white">
+      <i class="fa-solid fa-house-chimney w3-large"></i>
+      <p>Home</p>
+    </a>
+    <!-- Materias dinamicamente -->
+    <div id="nav-scroll" class="w3-bar-item w3-button w3-padding-large w3-hover-black w3-hover-text-amber w3-text-white"></div>></div>
+
+
+  </nav>
+
+  <main>
+    <div id="pagina-inicial" class="pagina-inicial">
+      <h1>Anotações de Provas</h1>
+   <div class="btn-bar">
+    <label for="fakeExportar">Exportar anotações</label>
+    <button id="fakeExportar"></button>
+
+    <label for="inputImportar">Importar anotações</label>
+    <input id="inputImportar" type="file" accept=".json" />
+  </div>
+
+    </div>
+    <div id="pagina-materia" class="pagina-materia">
+      <h2 id="titulo-materia"></h2>
+      <div id="container"></div>
+    </div>
+  </main>
+
+  <template id="materia-template">
+    <details open>
+      <summary></summary>
+      <div class="instrutor"><label></label><textarea></textarea></div>
+      <div class="instrutor"><label></label><textarea></textarea></div>
+      <div class="instrutor"><label></label><textarea></textarea></div>
+      <div class="instrutor"><label></label><textarea></textarea></div>
+    </details>
+  </template>
+
+  <script>
+    const materias = [
+      "Ciência Política","Comunicação e Expressão","Comunicação Social",
+      "Direito Administrativo","Direito Civil","Direito Constitucional",
+      "Direito Penal","Direito Penal Militar","DPO","Escrituração Profissional",
+      "Estatística","Ética","Filosofia","História da PM","IED","Incêndios",
+      "Inglês","Legislação da PM","POP","Sociologia"
+    ];
+
+    const instrutoresPorMateria = {
+      "Ciência Política": ["João Silva","Maria Souza","",""],
+      "Comunicação e Expressão": ["zz","Carlos Pereira","",""],
+      "Comunicação Social": ["Cap Verona","","",""],
+      "Direito Administrativo": ["Luís Almeida","","",""],
+      "Direito Civil": ["Rosa Mendes","Ricardo Alves","Juliana Torres",""],
+      "Direito Constitucional": ["Eduardo Gomes","","",""],
+      "Direito Penal": ["Camila Santos","André Moreira","",""],
+      "Direito Penal Militar": ["Cap Chenci","Cap Mandarini","",""],
+      "DPO": ["Cel PM Fedrizzi","","",""],
+      "Escrituração Profissional": ["Cap Manuella","Patrícia Lopes","",""],
+      "Estatística": ["Cap Ziviani","","",""],
+      "Ética": ["Paulo Henrique","","",""],
+      "Filosofia": ["Marta Lima","Diego Souza","",""],
+      "História da PM": ["Ten Cel Sérgio Marques","","",""],
+      "IED": ["Sofia Castro","","",""],
+      "Incêndios": ["Rafael Alves","","",""],
+      "Inglês": ["Laura Fernandes","Daniel Silva","",""],
+      "Legislação da PM": ["Carlos Eduardo","","",""],
+      "POP": ["Marcela Santos","","",""],
+      "Sociologia": ["Julio Cesar","Elaine Rodrigues","",""]
+    };
+
+    const STORAGE_PREFIX = "anotacao_";
+    const keyFor = (materia, idx) => `${STORAGE_PREFIX}${materia}_${idx}`;
+    const salvar = (mat, idx, txt) => localStorage.setItem(keyFor(mat, idx), txt);
+    const carregar = (mat, idx) => localStorage.getItem(keyFor(mat, idx)) || "";
+
+    function mostrarInicio() {
+      document.getElementById("pagina-inicial").style.display = "block";
+      document.getElementById("pagina-materia").style.display = "none";
+    }
+
+    function mostrarMateria(materia) {
+      document.getElementById("pagina-inicial").style.display = "none";
+      document.getElementById("pagina-materia").style.display = "block";
+      document.getElementById("titulo-materia").textContent = materia;
+
+      const container = document.getElementById("container");
+      container.innerHTML = "";
+
+      const template = document.getElementById("materia-template");
+      const clone = template.content.cloneNode(true);
+      const details = clone.querySelector("details");
+      details.querySelector("summary").textContent = materia;
+
+      (instrutoresPorMateria[materia] || ["", "", "", ""]).forEach((inst, i) => {
+        const div = clone.querySelectorAll(".instrutor")[i];
+        const lbl = div.querySelector("label");
+        const ta = div.querySelector("textarea");
+
+        if (inst.trim()) {
+          lbl.innerHTML = `Instrutor ${i+1}: <span class="nome-instrutor">${inst}</span>`;
+        } else {
+          lbl.style.display = ta.style.display = "none";
+          return;
+        }
+
+        ta.value = carregar(materia, i + 1);
+        ta.addEventListener("input", e => {
+          salvar(materia, i + 1, e.target.value);
+          ta.style.height = "auto";
+          ta.style.height = ta.scrollHeight + "px";
+        });
+
+        ta.style.height = "auto";
+        ta.style.height = ta.scrollHeight + "px";
+      });
+
+      container.appendChild(clone);
+    }
+
+    materias.forEach(mat => {
+      const link = document.createElement("a");
+      link.href = "#";
+      link.className = "w3-bar-item w3-button w3-padding-large w3-hover-black w3-hover-text-amber w3-text-white";
+      link.innerHTML = `<i class="fa-solid fa-file-lines"></i><p>${mat}</p>`;
+      link.onclick = () => mostrarMateria(mat);
+      document.getElementById("nav-scroll").appendChild(link);
+    });
+
+    document.querySelector('label[for="fakeExportar"]').addEventListener("click", () => {
+      const dados = {};
+      Object.keys(localStorage)
+        .filter(k => k.startsWith(STORAGE_PREFIX))
+        .forEach(k => dados[k] = localStorage.getItem(k));
+      const blob = new Blob([JSON.stringify(dados, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const agora = new Date();
+      const nome = `anotacoes_${agora.toLocaleDateString('pt-BR').replace(/\//g, '-')}.json`;
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = nome;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById("inputImportar").addEventListener("change", e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        try {
+          const dados = JSON.parse(ev.target.result);
+          Object.entries(dados).forEach(([k, v]) => localStorage.setItem(k, v));
+          alert("Anotações importadas com sucesso. Recarregando...");
+          location.reload();
+        } catch {
+          alert("Erro ao importar o arquivo.");
+        }
+      };
+      reader.readAsText(file);
+    });
+  </script>
+</body>
+</html>
