@@ -168,6 +168,7 @@
       background: #1c1c1c;
       color: var(--cinza-claro);
       border: 1px solid var(--bronze);
+      overflow: hidden;
     }
   </style>
 </head>
@@ -240,27 +241,26 @@
     };
 
     const instrutoresPorMateria = {
-      "Ciência Política": ["Ten Cel PM Melquisedech","Cap PM Kroll"],
-      "Comunicação e Expressão": ["Cel PM Angelica","Maj PM Renata"],
-      "Comunicação Social": ["Cap PM Verona","Cap PM Thales Leite","Maj PM Felipe"],
-      "Direito Administrativo": ["Luís Almeida","Cap PM Souza Lopes"],
-      "Direito Administrativo Disciplinar Militar": ["Maj PM Morassi","Maj PM Ferdinando"],
-      "Direito Civil": ["Cap PM Siqueira","Ten Cel PM Wellyngton","1ºTen PM Igor"],
-      "Direito Constitucional": ["Christiane Mina","Cel PM Reges","1ºTen PM Ricardo Oliveira","Cap PM Clovis"],
-      "Direito Penal": ["Ruy Cavalheiro","Marcos Fernando","Cel PM Sançana","Maj PM Nogueira"],
-      "Direito Penal Militar": ["Cap PM Chenci","Cap PM Mandarini"],
-      "DPO": ["Cel PM Fedrizzi","Ten Cel PM Carreira"],
-      "Escrituração Profissional": ["Cap Manuella"],
-      "Estatística": ["Cap PM Ziviani","Cap PM Paula","Ten PM Sérgio"],
-      "Ética Profissional": ["Cap PM Débora Antoneli","Cap PM Luiz Rodolfo"],
-      "Filosofia": ["Cel PM Faria","Cap PM Severo"],
-      "História da PM": ["Ten Cel PM Sérgio Marques","Maj PM Aguiar","Cap PM Vasconcelos"],
-      "IED": ["1ºTen PM Santos","Ten Cel PM Ewerton"],
-      "Incêndios": ["Cap PM Tadeu","Cap PM Mininel"],
-      "Inglês": ["1ºTen PM Geovana Lucena","1ºTen PM Manzano","Cap PM Aline Franco"],
-      "Legislação da PM": ["Cap PM Alves Moura","1ºTen PM Bonadio"],
-      "POP": ["1ºTen PM Glauco e 1ºTen Cavichini","Cap PM Mombergue e 1ºTen PM Geazi","Cap PM Colenturano e 1ºTen PM Figueiró","1ºTen PM Fernando e 1ºTen PM Cesar","1ºTen PM Glauco e 1ºTen PM Danilo","Cap PM Augusto e 1ºTen PM Tavares", "Cap PM Silvio e 1ºTen PM Froes"],
-      "Sociologia": ["Cap PM Kroll"]
+      "Ciência Política": ["João Silva", "Maria Souza", "", ""],
+      "Comunicação e Expressão": ["zz", "Carlos Pereira", "", ""],
+      "Comunicação Social": ["Cap Verona", "", "", ""],
+      "Direito Administrativo": ["Luís Almeida", "", "", ""],
+      "Direito Civil": ["Rosa Mendes", "Ricardo Alves", "Juliana Torres", ""],
+      "Direito Constitucional": ["Eduardo Gomes", "", "", ""],
+      "Direito Penal": ["Camila Santos", "André Moreira", "", ""],
+      "Direito Penal Militar": ["Cap Chenci", "Cap Mandarini", "", ""],
+      "DPO": ["Cel PM Fedrizzi", "", "", ""],
+      "Escrituração Profissional": ["Cap Manuella", "Patrícia Lopes", "", ""],
+      "Estatística": ["Cap Ziviani", "", "", ""],
+      "Ética": ["Paulo Henrique", "", "", ""],
+      "Filosofia": ["Marta Lima", "Diego Souza", "", ""],
+      "História da PM": ["Ten Cel Sérgio Marques", "", "", ""],
+      "IED": ["Sofia Castro", "", "", ""],
+      "Incêndios": ["Rafael Alves", "", "", ""],
+      "Inglês": ["Laura Fernandes", "Daniel Silva", "", ""],
+      "Legislação da PM": ["Carlos Eduardo", "", "", ""],
+      "POP": ["Marcela Santos", "", "", ""],
+      "Sociologia": ["Julio Cesar", "Elaine Rodrigues", "", ""]
     };
 
     const STORAGE_PREFIX = "anotacao_";
@@ -286,8 +286,12 @@
       const details = clone.querySelector("details");
       details.querySelector("summary").textContent = materia;
 
+      container.appendChild(clone); // Inserir no DOM antes
+
+      const instrutorDivs = container.querySelectorAll(".instrutor");
+
       (instrutoresPorMateria[materia] || ["", "", "", ""]).forEach((inst, i) => {
-        const div = clone.querySelectorAll(".instrutor")[i];
+        const div = instrutorDivs[i];
         const lbl = div.querySelector("label");
         const ta = div.querySelector("textarea");
 
@@ -299,17 +303,15 @@
         }
 
         ta.value = carregar(materia, i + 1);
+        ta.style.height = "auto";
+        ta.style.height = ta.scrollHeight + "px";
+
         ta.addEventListener("input", e => {
           salvar(materia, i + 1, e.target.value);
           ta.style.height = "auto";
           ta.style.height = ta.scrollHeight + "px";
         });
-
-        ta.style.height = "auto";
-        ta.style.height = ta.scrollHeight + "px";
       });
-
-      container.appendChild(clone);
     }
 
     materias.forEach(mat => {
