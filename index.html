@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Anotações para Provas</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
   <style>
+    :root {
+      --preto: #000000;
+      --cinza-claro: #cccccc;
+      --amarelo-ouro: #ffd700;
+      --dourado-escuro: #bfa340;
+      --bronze: #8c6239;
+      --vermelho-escuro: #8b0000;
+      --cinza-metalico: #aaaaaa;
+      --fundo-opaco: rgba(0, 0, 0, 0.75);
+      --cinza-forte: #2a2a2a;
+    }
+
     body {
       font-family: Arial, sans-serif;
-      background: url("fundo-feb.jpg") no-repeat center top fixed;
+      background: url("fundo-feb.jpg") center center no-repeat fixed;
       background-size: contain;
-      background-color: black;
-      color: #fff;
+      background-color: var(--preto);
+      color: var(--cinza-claro);
       text-shadow: 1px 1px 3px #000;
       margin: 0;
     }
@@ -34,10 +46,13 @@
     }
 
     h1, h2 {
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: var(--fundo-opaco);
       padding: 10px;
       border-radius: 10px;
       text-align: center;
+      color: var(--cinza-metalico);
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .btn-bar {
@@ -49,18 +64,18 @@
 
     .btn-bar label {
       padding: 8px 16px;
-      border: 1px solid #ffd700;
+      border: 1px solid var(--bronze);
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
-      background: rgba(0, 0, 0, 0.5);
-      color: #ffd700;
+      background: var(--fundo-opaco);
+      color: var(--bronze);
       text-shadow: 1px 1px 2px #000;
       transition: background-color .3s, transform .2s;
     }
 
     .btn-bar label:hover {
-      background-color: rgba(255,215,0,.15);
+      background-color: rgba(140, 98, 57, 0.2);
       transform: scale(1.03);
     }
 
@@ -71,8 +86,8 @@
 
     details {
       margin-bottom: 15px;
-      background: rgba(0,0,0,.6);
-      border: 1px solid #aaa;
+      background: var(--cinza-forte);
+      border: 1px solid var(--bronze);
       border-radius: 5px;
       padding: 10px;
     }
@@ -81,7 +96,7 @@
       font-weight: bold;
       font-size: 1.1em;
       cursor: pointer;
-      color: #ffd700;
+      color: var(--dourado-escuro);
     }
 
     .instrutor {
@@ -93,22 +108,56 @@
       display: block;
       font-weight: bold;
       margin-bottom: 3px;
-      color: #fff;
+      color: var(--cinza-metalico);
     }
 
     .nome-instrutor {
-      color: #ffd700;
+      color: var(--bronze);
       font-weight: 700;
       font-style: italic;
       text-shadow: 1px 1px 2px #000;
     }
 
-        .w3-sidebar {
-            width: 200px;
-            background: #222;
-    background-color: #000;
-        }
-  
+    .w3-sidebar {
+      width: 220px;
+      background: linear-gradient(to bottom, #1b1b1b, #111);
+      color: var(--bronze);
+      box-shadow: 4px 0 8px rgba(0, 0, 0, 0.6);
+      border-right: 2px solid var(--bronze);
+      overflow-y: auto;
+    }
+
+    .w3-sidebar a {
+      padding: 14px 8px;
+      text-align: center;
+      display: block;
+      color: var(--amarelo-ouro);
+      font-weight: bold;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(140, 98, 57, 0.2);
+      transition: background 0.3s, transform 0.2s, color 0.3s;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .w3-sidebar a i {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 20px;
+      color: var(--dourado-escuro);
+    }
+
+    .w3-sidebar a p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--cinza-claro);
+    }
+
+    .w3-sidebar a:hover {
+      background-color: rgba(255, 215, 0, 0.1);
+      color: #ffffff;
+      transform: scale(1.02);
+    }
+
     textarea {
       width: 100%;
       min-height: 80px;
@@ -116,11 +165,10 @@
       padding: 8px;
       border-radius: 4px;
       box-sizing: border-box;
-      background: #fff;
-      color: #000;
+      background: #1c1c1c;
+      color: var(--cinza-claro);
+      border: 1px solid var(--bronze);
     }
-
-
   </style>
 </head>
 <body>
@@ -129,24 +177,20 @@
       <i class="fa-solid fa-house-chimney w3-large"></i>
       <p>Home</p>
     </a>
-    <!-- Materias dinamicamente -->
-    <div id="nav-scroll" class="w3-bar-item w3-button w3-padding-large w3-hover-black w3-hover-text-amber w3-text-white"></div>></div>
-
-
+    <div id="nav-scroll" class="w3-bar-item w3-button w3-padding-large w3-hover-black w3-hover-text-amber w3-text-white"></div>
   </nav>
 
   <main>
     <div id="pagina-inicial" class="pagina-inicial">
-      <h1>Anotações de Provas</h1>
-   <div class="btn-bar">
-    <label for="fakeExportar">Exportar anotações</label>
-    <button id="fakeExportar"></button>
+      <div class="btn-bar">
+        <label for="fakeExportar">Exportar anotações</label>
+        <button id="fakeExportar"></button>
 
-    <label for="inputImportar">Importar anotações</label>
-    <input id="inputImportar" type="file" accept=".json" />
-  </div>
-
+        <label for="inputImportar">Importar anotações</label>
+        <input id="inputImportar" type="file" accept=".json" />
+      </div>
     </div>
+
     <div id="pagina-materia" class="pagina-materia">
       <h2 id="titulo-materia"></h2>
       <div id="container"></div>
@@ -165,34 +209,57 @@
 
   <script>
     const materias = [
-      "Ciência Política","Comunicação e Expressão","Comunicação Social",
-      "Direito Administrativo","Direito Civil","Direito Constitucional",
-      "Direito Penal","Direito Penal Militar","DPO","Escrituração Profissional",
-      "Estatística","Ética","Filosofia","História da PM","IED","Incêndios",
-      "Inglês","Legislação da PM","POP","Sociologia"
+      "Ciência Política", "Comunicação e Expressão", "Comunicação Social",
+      "Direito Administrativo", "Direito Civil", "Direito Constitucional",
+      "Direito Penal", "Direito Penal Militar", "DPO", "Escrituração Profissional",
+      "Estatística", "Ética", "Filosofia", "História da PM", "IED", "Incêndios",
+      "Inglês", "Legislação da PM", "POP", "Sociologia"
     ];
 
+    const iconesPorMateria = {
+      "Ciência Política": "fa-scale-balanced",
+      "Comunicação e Expressão": "fa-pen-nib",
+      "Comunicação Social": "fa-bullhorn",
+      "Direito Administrativo": "fa-gavel",
+      "Direito Civil": "fa-file-contract",
+      "Direito Constitucional": "fa-landmark",
+      "Direito Penal": "fa-balance-scale",
+      "Direito Penal Militar": "fa-shield-halved",
+      "DPO": "fa-sitemap",
+      "Escrituração Profissional": "fa-book",
+      "Estatística": "fa-chart-line",
+      "Ética": "fa-scale-unbalanced-flip",
+      "Filosofia": "fa-brain",
+      "História da PM": "fa-landmark-flag",
+      "IED": "fa-lightbulb",
+      "Incêndios": "fa-fire-extinguisher",
+      "Inglês": "fa-language",
+      "Legislação da PM": "fa-scroll",
+      "POP": "fa-list-check",
+      "Sociologia": "fa-people-group"
+    };
+
     const instrutoresPorMateria = {
-      "Ciência Política": ["João Silva","Maria Souza","",""],
-      "Comunicação e Expressão": ["zz","Carlos Pereira","",""],
-      "Comunicação Social": ["Cap Verona","","",""],
-      "Direito Administrativo": ["Luís Almeida","","",""],
-      "Direito Civil": ["Rosa Mendes","Ricardo Alves","Juliana Torres",""],
-      "Direito Constitucional": ["Eduardo Gomes","","",""],
-      "Direito Penal": ["Camila Santos","André Moreira","",""],
-      "Direito Penal Militar": ["Cap Chenci","Cap Mandarini","",""],
-      "DPO": ["Cel PM Fedrizzi","","",""],
-      "Escrituração Profissional": ["Cap Manuella","Patrícia Lopes","",""],
-      "Estatística": ["Cap Ziviani","","",""],
-      "Ética": ["Paulo Henrique","","",""],
-      "Filosofia": ["Marta Lima","Diego Souza","",""],
-      "História da PM": ["Ten Cel Sérgio Marques","","",""],
-      "IED": ["Sofia Castro","","",""],
-      "Incêndios": ["Rafael Alves","","",""],
-      "Inglês": ["Laura Fernandes","Daniel Silva","",""],
-      "Legislação da PM": ["Carlos Eduardo","","",""],
-      "POP": ["Marcela Santos","","",""],
-      "Sociologia": ["Julio Cesar","Elaine Rodrigues","",""]
+      "Ciência Política": ["João Silva", "Maria Souza", "", ""],
+      "Comunicação e Expressão": ["zz", "Carlos Pereira", "", ""],
+      "Comunicação Social": ["Cap Verona", "", "", ""],
+      "Direito Administrativo": ["Luís Almeida", "", "", ""],
+      "Direito Civil": ["Rosa Mendes", "Ricardo Alves", "Juliana Torres", ""],
+      "Direito Constitucional": ["Eduardo Gomes", "", "", ""],
+      "Direito Penal": ["Camila Santos", "André Moreira", "", ""],
+      "Direito Penal Militar": ["Cap Chenci", "Cap Mandarini", "", ""],
+      "DPO": ["Cel PM Fedrizzi", "", "", ""],
+      "Escrituração Profissional": ["Cap Manuella", "Patrícia Lopes", "", ""],
+      "Estatística": ["Cap Ziviani", "", "", ""],
+      "Ética": ["Paulo Henrique", "", "", ""],
+      "Filosofia": ["Marta Lima", "Diego Souza", "", ""],
+      "História da PM": ["Ten Cel Sérgio Marques", "", "", ""],
+      "IED": ["Sofia Castro", "", "", ""],
+      "Incêndios": ["Rafael Alves", "", "", ""],
+      "Inglês": ["Laura Fernandes", "Daniel Silva", "", ""],
+      "Legislação da PM": ["Carlos Eduardo", "", "", ""],
+      "POP": ["Marcela Santos", "", "", ""],
+      "Sociologia": ["Julio Cesar", "Elaine Rodrigues", "", ""]
     };
 
     const STORAGE_PREFIX = "anotacao_";
@@ -224,7 +291,7 @@
         const ta = div.querySelector("textarea");
 
         if (inst.trim()) {
-          lbl.innerHTML = `Instrutor ${i+1}: <span class="nome-instrutor">${inst}</span>`;
+          lbl.innerHTML = `Instrutor ${i + 1}: <span class="nome-instrutor">${inst}</span>`;
         } else {
           lbl.style.display = ta.style.display = "none";
           return;
@@ -248,7 +315,8 @@
       const link = document.createElement("a");
       link.href = "#";
       link.className = "w3-bar-item w3-button w3-padding-large w3-hover-black w3-hover-text-amber w3-text-white";
-      link.innerHTML = `<i class="fa-solid fa-file-lines"></i><p>${mat}</p>`;
+      const icone = iconesPorMateria[mat] || "fa-file-lines";
+      link.innerHTML = `<i class="fa-solid ${icone}"></i><p>${mat}</p>`;
       link.onclick = () => mostrarMateria(mat);
       document.getElementById("nav-scroll").appendChild(link);
     });
